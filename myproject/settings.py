@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1t)x1+8fqu(+nf8esq5)v77rzeu2zx09y-^zvxy)n^-e0vw5la'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG') == 'true'
 
-ALLOWED_HOSTS = ['fule-log-3.onrender.com']
+ALLOWED_HOSTS = ['fule-log-3.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -78,9 +81,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sql5752553',
-        'USER': 'sql5752553',
-        'PASSWORD': 'eYC7EgqYXi',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': 'sql5.freesqldatabase.com',
         'PORT': '3306'
     }
