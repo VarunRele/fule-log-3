@@ -25,7 +25,7 @@ SECRET_KEY = '1t)x1+8fqu(+nf8esq5)v77rzeu2zx09y-^zvxy)n^-e0vw5la'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fule-log-3.onrender.com']
 
 
 # Application definition
