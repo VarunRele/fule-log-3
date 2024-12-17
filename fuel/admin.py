@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Log
+from .models import Log, Vehicle
 
 
 @admin.register(Log)
@@ -20,3 +20,7 @@ class LogAdmin(admin.ModelAdmin):
     # @admin.display(description="Quantity")
     # def quantity_with_unit(self, obj: Log):
     #     return f"{obj.quantity} {obj.unit()}"
+
+@admin.register(Vehicle)
+class VehicleAdmin(admin.ModelAdmin):
+    pass
