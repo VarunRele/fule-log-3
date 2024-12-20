@@ -27,7 +27,7 @@
                         </li>
                     {% endif %}
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown
                     </a>
                     <ul class="dropdown-menu">
@@ -35,7 +35,13 @@
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    </ul> -->
+                    <select name="Vehicles" id="carDropdown" onchange="updateLogs()" class="nav-link dropdown-toggle">
+                        <option value="all">All Cars</option>
+                        {% for car in cars %}
+                            <option value="{{ car.id }}">{{ car }}</option> 
+                        {% endfor %}
+                    </select>
                     </li>
                     <li class="nav-item">
                         {% if user.is_authenticated %}

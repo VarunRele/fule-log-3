@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpRequest
-from .models import Log
+from django.http import HttpRequest, JsonResponse
+from .models import Log, Vehicle
 from django.contrib.auth.decorators import login_required
 from .forms import LogForm
 from django.contrib import messages
+from django.forms.models import model_to_dict
 import logging
 
 def index(request: HttpRequest):
     logs = Log.objects.all().order_by('-created_at')
-    return render(request, 'fuel/tabular.html', {'logs': logs})
+    cars = Vehicle.objects.all()
+    return render(request, 'fuel/tabular.html', {'logs': logs, 'cars': cars})
     
 @login_required
 def insert(request: HttpRequest):
@@ -43,3 +45,13 @@ def delete_log(request: HttpRequest, pk: int):
     log_value = get_object_or_404(Log, pk=pk)
     log_value.delete()
     return redirect('fuel:index')
+
+
+def fuel_logs_api(request: HttpRequest):
+    selected_car = request.GET.get('car', 'all')
+    if selected_car == 'all':
+        logs = Log.objects.all()
+    else:
+        logs = Log.objects.filter(vehicle__id=selected_car)
+    values = [model_to_dict(x) for x in logs]
+    return JsonResponse(values, safe=False)

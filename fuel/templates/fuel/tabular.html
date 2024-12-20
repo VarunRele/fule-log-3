@@ -1,7 +1,7 @@
 {% extends "fuel/base.html" %}
 
 {% block content %}
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped" id="vehicleTable">
         <thead>
             <tr>
                 <th scope='col'>#</th>
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {% for log in logs %}
-                <tr>
+                <tr data-vehicle="{{ log.vehicle.id }}">
                     <th scope='row'>{{ forloop.counter }}</th>
                     <th>{{ log.payee|title }}</th>
                     <th>{{ log.price }}</th>
